@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatBot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #00ffff;
+        }
+        .chatbox {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #2ab6f2e2;
+            top: 150px;
+            height: 400px;
+            background-color: #dcf8c6;
+            border-radius: 20px;
+        }
+        .content {
+            max-height: 300px;
+            overflow: auto;
+            padding-right: 10px;
+            word-wrap: break-word;
+        }
+        .content::-webkit-scrollbar {
+            width: 10px; /* Chiều rộng của thanh cuộn */
+        }
+        .content::-webkit-scrollbar-thumb {
+            background: pink; /* Màu của thanh cuộn */ border-radius: 6px; /* Góc bo tròn của thanh cuộn */
+        }
+        .content::-webkit-scrollbar-track { background: none; /* Màu nền của track thanh cuộn */ }
+
+        .chatlog {
+            width: 500px;
+            padding: 10px 0;
+            background-color: rgb(84, 158, 181);
+            position: absolute;
+            bottom: 10px;
+            border: black 1px solid;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-sizing: border-box;
+        }
+        .user, .bot {
+            padding: 8px;
+            border-radius: 10px;
+            margin: 5px 0;
+            max-width: 60%;
+            margin-bottom: 15px;
+
+        }
+        .user {
+            background-color: #f8c6e2;
+            text-align: right;
+            margin-left: auto;
+        }
+        .bot {
+            background-color: #77c8f7;
+            text-align: left;
+        }
+        .input1{
+            border-radius: 10px;
+            background-color: #e5eded ;
+            height: 30px;
+            padding-left:5px ;
+            border: 1px solid;
+            width: 80%;
+            margin-left: 5px;
+            outline: none;
+            line-height: 30px;
+            overflow: hidden;
+            resize: none;
+        }
+        .input1:focus{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 17px;
+        }
+        i{
+            font-size: 20px;
+            color: rgb(0, 26, 255);
+        }
+        #icon1{
+            margin-left: 5px;
+
+        }
+        #icon2{
+            margin-left: 5px;
+        }
+        #icon3{
+            margin-left:5px ;
+        }
+        #icon2:hover{
+            color: yellow;
+        }
+        #icon1:hover{
+            color: aqua;
+        }
+        #icon3:hover{
+            color: rgb(224, 174, 76);
+        }
+        .file_label{
+            display: inline-block;
+        }
+        .file_input{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbox">
+        <div class="content" id="content"></div>
+        <div id="chatlog" class="chatlog">
+            <textarea id="userInput" class="input1" placeholder="...." ></textarea>
+            <a href="#">
+                <i class="fa-solid fa-play" id="icon1" onclick="sendMessage()" title="Gửi"></i>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-microphone" id="icon2" onclick="microphone()" title="Nói bằng giọng"></i>
+            </a>
+            <a href="#">
+                <input type="file" id="file" class="file_input" accept=".mp3 , .m4a">
+                <label for="file" class="file-label">
+                    <i class="fa-solid fa-file-audio" id = "icon3" onclick = "enterfile()" title="Gửi file mp3"></i>
+                </label>
+            </a>
+        </div>
+    </div>
+    <script>
+        function enterfile() {
+            const file = document.querySelector("#file");
+            file.addEventListener("change", handleFileChange);
+        }
+        function handleFileChange(e) {
+            const files = e.target.files;
+            for (const file of files) {
+            fetch('/convert_file_mp3',{
+                method : "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify({file : file.name })
+
+                })
+                .then(response => response.json())
+                .then(data => {
+                if(data.text){
+                    var content = document.getElementById("content");
+                    content.innerHTML += "<div class='user'>" + data.text + "</div>";
+                    fetch("/get_response", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ message: data.text })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        content.innerHTML += "<div class='bot'>" + data.response + "</div>";
+                        content.scrollTop = content.scrollHeight;
+                        });
+                    }
+                })
+            }
+        }
+        function sendMessage() {
+            var userInput = document.getElementById("userInput").value;
+            document.getElementById("userInput").value = "";
+            var content = document.getElementById("content");
+            content.innerHTML += "<div class='user'>" + userInput + "</div>";
+
+            fetch("/get_response", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                content.innerHTML += "<div class='bot'>" + data.response + "</div>";
+                content.scrollTop = content.scrollHeight;
+            });
+        }
+        function microphone(){
+            fetch('/speech_recognize')
+            .then(response => response.json())
+            .then(data => {
+                if(data.text){
+                    var content = document.getElementById("content");
+                    content.innerHTML += "<div class='user'>" + data.text + "</div>";
+
+                    fetch("/get_response", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ message: data.text })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        content.innerHTML += "<div class='bot'>" + data.response + "</div>";
+                        content.scrollTop = content.scrollHeight;
+                    });
+                }
+            });
+
+        }
+    </script>
+</body>
+</html>

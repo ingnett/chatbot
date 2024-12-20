@@ -1,0 +1,41 @@
+Quy trình xử lý bài toán :
+Đầu vào : Dữ lieu dạng chữ hoặc going noi
+Đầu ra : Dữ liệu dạng chữ bot phản hồi lại
+
+Bước 1 : Tìm hiểu qua cơ chế của chatbot 
+Bước 2 : Thu thập dữ liệu 
+	- Dữ lieu là các câu hỏi, câu trả lời
+	- Các cuộc hội thoại ,..
+Bước 3 : Tiền xử lý dữ liệu
+Bằng các công cụ để xử lý các kí tự ko cần thiết , xử lý lỗi chữ , loại bỏ các từ dư thừa
+Bước 4 : Chọn các mô hình học máy và thuật toán phù hợp để giải quyết bài toán 
+	- Nhận diện giọng nói
+	- Nlp (Chuyển đổi văn bản thành ngôn ngữ máy phù hợp)
+	- Logistic Regresstion (Phân biệt câu hỏi và câu trả lời)
+	- Countvectorizer (Chuyển đổi văn bản thành dạng vecto)
+Bước 5 : Huấn luyện mô hình 
+	- Sử dung các tập dữ liệu phù hợp để huấn luyện cho chatbot
+Bước 6 : Triển khai mô hình 
+	- Sử dung các API để tích hợp cho chatbot như thư viện flask
+Bước 7 : Xử lý các lỗi và kiểm thử
+	- Kiểm tra xem các lỗi cần xử lý từ phía người nhập hoặc hệ thống và xử lý chung
+
+
+Quy trình người dung sử dụng
+- Khi người dung nhập dữ liệu bàn phím hoặc giọng nói trên thanh nhập hoặc microphone
+- Yêu cầu sẽ gửi về hệ thống thông qua các endpoint
+- Dữ liệu sẽ gửi đến đích được xử lý 
+
+- Với dạng văn bản : 
+Dữ liệu sẽ đc phân loại xem đây là dạng câu hỏi hoặc dạng câu loại nào khác
+- Trong này để phân biệt được câu hỏi với loại câu khác như câu trả lời của người dung nhập lại thi thuật toán đc sử dung là hồi quy logistic 
+Thuật toán này sẽ có 1 tập dữ liệu c xử lý từ trc sẽ phân biết đc câu hỏi và câu trả lời của người dung thông qua dữ liệu người dung huấn luyện từ trc
+- Sau khi phân biết đc thì hệ thống sẽ kiểm trả cơ sở dữ liệu hoặc các quy tấc nhất định để lựa chọn phản hồi phù hợp (Ví dụ người dung nhập câu hỏi không có trong cơ sở dữ liệu đc huấn luyện thì hệ thong sẽ trả lời là "Tôi không  biêt" thông qua" mức độ tin cậy của dữ liệu đó trong cơ sở dữ liệu (=0 nếu ko có ) càng nhiều thif độ tin cậy càng cao
+- Khi chọn đc dữ liệu phù hợp thì hệ thống sẽ phản hồi với người dung thông qua server và đc hiển thị qua giao diện web 
+
+- Với dạng giọng nói : 
+ Hệ thống sẽ cần them 1 bước là nhận diện giọng nói 
+- Dữ liệu sẽ được hệ thống xử lý bang cách hệ thống sẽ tạo 1 bộ nhạn diện giọng nói
+- Dữ liệu thông qua đó sẽ qua bước tiền xử lý để loại bỏ tiếng ồn hoặc cải thiện âm thanh nếu cần 
+- Hệ thống sẽ sử dung các API nhận diện để chuyển đổi âm thanh thành văn bản 
+Sau đó văn bản sẽ đc xử lý như bước trên

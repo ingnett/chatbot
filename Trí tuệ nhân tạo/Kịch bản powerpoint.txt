@@ -1,0 +1,76 @@
+Kịch bản powerpoint 
+
+Đầu tiên 
+I Giới thiệu đề tài : Chatbot học tập
+
+- Giới thiệu sơ qua về chatbot
+  - Chatbot là gì ? 
+Chatbot là chương trình hoặc ứng dụng có thể trò chuyện với người dùng thông qua giọng nói hoặc văn bản. Kể từ thời điểm chatbot đầu tiên được phát triển vào những năm 1960, ứng dụng này đã không ngừng đổi mới công nghệ hỗ trợ. Chatbot truyền thống sử dụng quy tắc định sẵn để trò chuyện với người dùng và cung cấp câu trả lời theo kịch bản. Chatbot hiện tại sử dụng công nghệ xử lý ngôn ngữ tự nhiên (NLP) để hiểu người dùng và nhờ đó, có thể trả lời các câu hỏi phức tạp với chiều sâu và độ chính xác cao.
+
+- Quy trình hoạt động của chatbot
+Thông qua 3 bước : Nhận dạng, xử lý , phản hồi
+- Nhận dạng :
+Chatbot đầu tiên phân tích đầu vào từ người dùng, có thể là văn bản, giọng nói, ảnh hoặc video.Bằng cách sử dụng các kỹ thuật như phân tích cú pháp, phân tích ngữ nghĩa, nhận dạng giọng nói, và nhận dạng hình ảnh, chatbot trích xuất thông tin quan trọng như từ khóa, ý định, thực thể, và nhiều yếu tố khác
+- Xử lý : 
+Chatbot sử dung thông tin đã đc trích xuất để đem ra đầu ra hợp lý nhất. Bằng cách sử dung các kỹ thuật xử lý , một số thuật toán hoặc các thông tin trong cơ sở dữ liệu
+- Phản hồi : 
+Chatbot truyền ra đến người dung , có thể qua văn bản , giọng nói , ảnh hoặc video
+
+- Phân loại chatbot
+Chatbot đc chia thành 3 loại chính : Clicking Bot, NLP Bot và NLP & Dialogue Management Bot
+
+1. Click Bot
+Clicking Bot là một loại Chatbot mà người dùng có thể giao tiếp bằng cách nhấn vào các nút được thiết kế sẵn trong Bot để dẫn dắt đến vấn đề cần hỏi. Clicking Bot không hiểu được nội dung tin nhắn mà khách hàng gửi đến.
+
+2. NLP Bot
+NLP Bot là Chatbot sử dụng công nghệ Học Máy và Xử lý ngôn ngữ tự nhiên (Natural Language Processing - NLP). Với NLP Bot, người dùng có thể tự gõ các câu hỏi bất kỳ và bot có thể hiểu được dựa trên dữ liệu đã được đào tạo từ trước. Các trường dữ liệu bao gồm: câu mẫu, ý định, thực thể.
+
+3.NLP & Dialog Management Bot
+NLP & Dialog Management Bot là loại Chatbot toàn diện nhất, đa dạng cách xử lí (vừa có các nút như Clicking Bot, vừa hiểu được ý định của người dùng như NLP Bot). Và đặc biệt, NLP & Dialog Management Bot có khả năng ghi nhớ ngữ cảnh hội thoại của người dùng.
+
+II Các kĩ thuật xử lý quan trọng trong chatbot
+1. NLP
+NLP là quá trình AI được dạy để hiểu quy tắc, cú pháp của ngôn ngữ, đồng thời máy móc được lập trình giúp phát triển các thuật toán phức tạp, nhằm biểu diễn những quy tắc đã học. Sau đó, chúng áp dụng thuật toán để thực hiện tác vụ cụ thể.NLP kết hợp ngôn ngữ học tính toán, mô hình hóa ngôn ngữ con người dựa trên quy tắc với các mô hình thống kê, học máy (machine learning) và học sâu (deep learning).
+- Cách thức hoạt động của NLP
+Các mô hình NLP hoạt động bằng cách tìm mối quan hệ giữa các phần cấu thành của ngôn ngữ - ví dụ: các chữ cái, từ và câu được tìm thấy trong tập dữ liệu văn bản. Kiến trúc NLP sử dụng các phương pháp khác nhau để tiền xử lý dữ liệu, trích xuất tính năng và mô hình hóa.
+
+Một số quy trình :
+
+Tiền xử lý dữ liệu: Trước khi mô hình xử lý văn bản cho một tác vụ cụ thể, văn bản thường cần được xử lý trước để cải thiện hiệu suất mô hình hoặc để biến các từ và ký tự thành định dạng mà mô hình có thể hiểu được. AI tập trung vào dữ liệu là một phong trào đang phát triển ưu tiên tiền xử lý dữ liệu . Các kỹ thuật khác nhau đc sử dung trong quá trình này :
+- Stemming và lemmatization : 
+Stemming : Ánh xạ tới cá từ dạng cơ sở như notebook - note , university - univer 
+Lemmatization : Tương tự như Stemming nhưng thông minh hơn và áp dung hình thai của từ trong từ điển
+- Phân đoạn câu : Chia một đoạn văn bản lớn thành các đơn vị câu có ý nghĩa ngôn ngữ.
+- Dừng xóa : Nhằm mục đích loại bỏ các từ phổ biến nhất không thêm nhiều thông tin vào văn bản
+- Tokenization : Chia văn bản thành các từ riêng lẻ và các đoạn từ 
+
+
+Tính năng trích xuất: Hầu hết các kỹ thuật học máy thông thường hoạt động trên các tính năng - thường là các con số mô tả một tài liệu liên quan đến kho dữ liệu chứa nó - được tạo bởi Bag-of-Words, TF-IDF hoặc kỹ thuật tính năng chung như độ dài tài liệu, cực tính của từ và siêu dữ liệu.
+ 
+- Hình 1: 
+
+- Bag-word : Đếm số lần mỗi từ xuất hiện trong văn bản
+
+- Hình 2:  
+
+- TF-IDF : Đánh giá tầm quan trọng của mỗi từ
+
+- Hình 3:
+
+- Tần số tài liệu nghịch đảo : Dùng để giải quyết vấn đề các từ phổ biến nhưng ko có ý nghĩa trong tài lieu 
+- Word2Vec : sử dung mạng nở ron nhằm dự đoán các từ ngữ mục tiêu từ các từ xung quanh
+- GLoVe : Tương tự như Word2Vec nhưng sử dung kĩ thuật ma trận
+
+
+Mô Hình : Sau khi dữ liệu được xử lý trước, nó được đưa vào kiến trúc NLP mô hình hóa dữ liệu để hoàn thành nhiều tác vụ khác nhau.
+
+2. Các thuật toán sử dung trong NLP
+- Các kỹ thuật NLP học máy truyền thống 
+  Hồi quy logistic 
+  Naive Bayes
+  Cây quyết đinh
+  Phân bổ Dirichleet tiềm ẩn
+  Mô hình Markov ân
+- Các kĩ thuật NLP học sâu
+  Mạng nở-ron tích chap(CNN)
+  Mạng nơ-ron tái phát (RNN)
